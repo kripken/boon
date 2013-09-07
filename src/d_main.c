@@ -335,10 +335,8 @@ static const char *auto_shot_fname;
 //  calls I_GetTime, I_StartFrame, and I_StartTic
 //
 
-static void D_DoomLoop(void)
+static void D_DoomLoopIter(void)
 {
-  for (;;)
-    {
       WasRenderedInTryRunTics = false;
       // frame syncronous IO operations
       I_StartFrame ();
@@ -379,7 +377,26 @@ static void D_DoomLoop(void)
   auto_shot_count = auto_shot_time;
   M_DoScreenShot(auto_shot_fname);
       }
-    }
+}
+
+#ifdef __EMSCRIPTEN__
+void D_DoomLoopIterWrapper(void *arg)
+{
+  D_DoomLoopIter();
+}
+
+#include <emscripten.h>
+#endif
+
+static void D_DoomLoop(void)
+{
+#ifdef __EMSCRIPTEN__
+  emscripten_set_main_loop(D_DoomLoopIter, 0, 1);
+  //D_DoomLoopIter(); // call once, will schedule further calls of itself
+  //emscripten_exit_with_live_runtime();
+#else
+  for (;;) D_DoomLoopIter();
+#endif
 }
 
 //

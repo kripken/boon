@@ -454,6 +454,10 @@ static void CheckQueuedPackets(void)
 }
 #endif // HAVE_NET
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 void TryRunTics (void)
 {
   int runtics;
@@ -474,7 +478,14 @@ void TryRunTics (void)
           I_WaitForPacket(ms_to_next_tick);
         else
 #endif
+        {
+#ifdef __EMSCRIPTEN__
+          //extern void D_DoomLoopIterWrapper(void *arg);
+          //emscripten_async_call(D_DoomLoopIterWrapper, NULL, ms_to_next_tick);
+#else
           I_uSleep(ms_to_next_tick*1000);
+#endif
+        }
       }
       if (I_GetTime() - entertime > 10) {
 #ifdef HAVE_NET
