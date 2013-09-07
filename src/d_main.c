@@ -178,7 +178,9 @@ static void D_Wipe(void)
       int nowtime, tics;
       do
         {
+#ifndef __EMSCRIPTEN__
           I_uSleep(5000); // CPhipps - don't thrash cpu in this loop
+#endif
           nowtime = I_GetTime();
           tics = nowtime - wipestart;
         }
