@@ -1,0 +1,9 @@
+*Makefile
+config.h
+config.log
+config.status
+prboom.spec
+*~
+*.deps*
+stamp-h1
+
