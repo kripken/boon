@@ -54,7 +54,7 @@
 #define TRUE 1
 #define FALSE 0
 
-#ifndef HAVE_STRLWR
+#if !defined(HAVE_STRLWR) && !__EMSCRIPTEN__
 #include <ctype.h>
 
 static char* strlwr(char* str)

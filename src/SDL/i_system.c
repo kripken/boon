@@ -437,7 +437,7 @@ void I_SetAffinityMask(void)
     {
       errbuf = WINError();
     }
-#elif defined(HAVE_SCHED_SETAFFINITY)
+#elif defined(HAVE_SCHED_SETAFFINITY) && !__EMSCRIPTEN__
     // POSIX version:
     int i;
     {
