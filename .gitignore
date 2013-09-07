@@ -11,4 +11,7 @@ stamp-h1
 *.diff
 src/prboom
 src/prboom-game-server
-
+*.bc
+*.html
+*.data
+*.swp

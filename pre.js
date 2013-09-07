@@ -1,0 +1,3 @@
+
+Module.arguments = ['-nofullscreen', '-nosound'];
+
