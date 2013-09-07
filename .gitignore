@@ -6,4 +6,9 @@ prboom.spec
 *~
 *.deps*
 stamp-h1
+*.o
+*.a
+*.diff
+src/prboom
+src/prboom-game-server
 
