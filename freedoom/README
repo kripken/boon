@@ -1,0 +1,159 @@
+= Freedoom
+
+Freedoom is a project to create a complete Doom II-compatible IWAD file
+which is Free Software.
+
+The IWAD file is the file used by Doom which contains all the game data
+(graphics, sound effects, music, etc.). While the Doom source code is
+Free, you currently still need one of the proprietary IWAD files from id
+in order to play Doom. Freedoom aims to create a Free alternative.
+Combined with the GPL-licensed Doom source code this will result in a
+complete Free Doom-based game.
+
+For more information, see http://freedoom.nongnu.org/.
+
+== What ``Free Software'' means
+
+When we speak of Free Software, we refer to the software movement in
+which your freedoms to use, copy, modify, and study it are ensured.  For
+example, you may freely use Freedoom for any purpose you see fit, you
+may redistribute it to anyone without needing to ask for permission, you
+may modify it (provided you keep the license intact, see `COPYING`), and
+you may study it -- for example, to see how a Doom IWAD is built.  To
+facilitate this, you can get the full source code (here, in the form of
+a DeuTex tree) for Freedoom.
+
+You may read more about Free Software at the http://www.gnu.org/[GNU]
+and http://www.fsf.org/[Free Software Foundation] websites.
+
+== Contributing to Freedoom
+
+Contributions to Freedoom are always welcome, however there are a few
+guidelines that should be followed:
+
+=== Intellectual Property
+
+We know people hate legalese, but this is important.  This applies to
+*everything* which is submitted.
+
+You must be incredibly careful when basing on existing graphics or
+sounds.  Most Doom projects are incredibly lax on reusing intellectual
+property -- there are plenty of WADs out there which contain modified
+Doom sprites, for example.  However, due to the nature of this project,
+we do not have the same liberty to rip as we please.
+
+The general rules go as follows:
+
+  * Everything you submit must be 100% your own work.  You must not base
+    upon resources from Doom or any other game.  You may not even rip
+    textures from WADs you have downloaded (if you find a WAD with
+    textures in which look useful, let us know -- that way, we can
+    contact the author).
+  * Do not simply copy the original resources.  Where possible, try to
+    make an effort to make the new versions look visibly different from
+    the originals.
+  * Be especially careful of ``free texture'' (or ``free sound'' or
+    ``free graphic'') sites.  Although these would appear at first to
+    be okay to use, many are free for ``non-commercial use only''.  One
+    of the things we want to be able to do is put this on GNU/Linux CDs
+    (which are sold -- ``a commercial use'').
+  * The main exception is that you may of course reuse anything in the
+    Freedoom source tree.  In fact, this is encouraged, as reusing
+    material will give the WAD a more consistent feel.
+
+=== Levels
+
+Levels should be in Boom format; you may exceed the limits of Vanilla
+Doom and use Boom features; however, do not use features that are not
+supported by Boom 2.02 and compatible ports. Levels should be in Doom's
+original format, not in ``Hexen'' format.
+
+It is sensible to also heed the following guidelines:
+
+  * Make sure that skill levels are implemented, and that all
+    multiplayer start points are present.
+  * Make levels appropriately difficult for their position within the
+    progression of the game.  Also bear in mind that not all players may
+    be as skilled a player as you.
+  * Do not use tricks that exploit Doom's software renderer; some source
+    ports, especially those that use hardware accelerated rendering, may
+    not render it properly.  Examples of tricks to avoid include those used
+    to simulate 3D bridges and ``deep water'' effects.
+  * Boom removes almost all of the limits on rendering; however, do not
+    make excessively complicated scenes.  It is desirable that Freedoom
+    levels should be playable on old or low-powered hardware.
+  * Always test in http://www.teamtnt.com/boompubl/boom2.htm[Boom]
+    itself rather than a derivative such as PrBoom.  This ensures that
+    your levels really are Boom-compatible rather than using any extra
+    features.  As DOS is rather rare these days, you may not have a
+    system which can run Boom natively, so you may use either
+    http://www.dosbox.com/[DOSBox] or http://www.freedos.org/[FreeDOS].
+
+=== Graphics
+
+  * Graphics should be the same color and size as the originals to
+    remain compatible with PWADs (otherwise, they may end up looking
+    like a mess).  They cannot use the Doom font.
+  * Textures should be the same dimensions as the originals.  They
+    should be similar but not identical (to avoid IP infringement) --
+    in fact, they should be as different as possible while keeping to
+    the general theme of the texture.  As mentioned above, try to make
+    a conscious effort to make the textures visibly different from the
+    originals.  Critically, the textures should tile in the same way as
+    the originals.
+  * Some textures contain the letters UAC or references to UAC; this is
+    an intellectual property of id Software (trademarked).  Instead, use
+    the letters AGM in your textures.
+  * Sprites should be roughly the same size and shape, but different to
+    the originals.  Doom monsters are id's intellectual property (which
+    means no imps, cyberdemons, etc).  The new monsters will behave the
+    same way as the originals, but will be totally new.
+
+=== Build process
+
+The Freedoom build process is fairly complete and should not change
+without good reason.  Write a decent explanation why your method is
+better; just enough to get your point across is good enough.
+
+=== Documentation
+
+Freedoom always needs help with the documentation, so please send your
+patches, but keep in mind:
+
+  * We use http://www.methods.co.nz/asciidoc/[AsciiDoc] for writing the
+    documentation.  AsciiDoc is a simple plaintext-based format which is
+    simple to read and write in its source form, and makes pretty HTML
+    documents out of them (it also supports other formats like
+    DocBook/PDF/manual pages...).
+  * Headers are formated in a wiki-style format, this makes it easier
+    for Vim (perhaps other editors, too) to automatically re-format
+    text.
+  * Text is kept at 72 characters wide.  In Vim, you can set the editor
+    to automatically insert line breaks as you're typing by performing
+    `set textwidth=72`.  Special exceptions to the width rule might be
+    allowed when necessary (for example, inserting long URLs).
+
+=== Submitting your work
+
+TODO: Figure out the best method of doing this.  This mainly requires
+time to see what works best.
+
+If you use git, make sure your commit messages start with a single line,
+under 72 characters, which provides an adequate summary of your changes.
+You should prefix this line with the component you are committing (for
+example, ``map17: fixed unbeatable map'').  This should be followed by a
+blank line and a paragraph or more to explain your change in detail (for
+example, explaining what part of the map was broken).  See commit
+49dc6ca861d4b85ca16b219941ecb86d3e172ac1 for an example.  Sign your
+comments with +git commit -s+, these leaves a trail of whose hands a
+commit went through and could be useful for some purposes; git alone can
+give an indication of up to two people, however the AUTHOR/COMMITTER
+fields are not quite reliable or flexible enough for the same
+information.
+
+You should commit often; each important change should get its own
+commit, but minor changes need not.  Take advantage of git's ability to
+rewrite history, don't use `git revert` on your private copy of the
+repository, just remove (`git reset`) or amend (`git commit --amend`)
+the faulty commit as necessary.  Leave all the interesting and important
+history bits, leave out stupid mistakes like spell check errors.
