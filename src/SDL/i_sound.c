@@ -46,7 +46,9 @@
 #include "SDL.h"
 #include "SDL_audio.h"
 #include "SDL_mutex.h"
+#ifndef __EMSCRIPTEN__
 #include "SDL_byteorder.h"
+#endif
 #include "SDL_version.h"
 #ifdef HAVE_MIXER
 #include "SDL_mixer.h"

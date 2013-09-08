@@ -639,7 +639,7 @@ void I_UpdateVideoMode(void)
       init_flags = SDL_DOUBLEBUF;
     else
       init_flags = SDL_SWSURFACE;
-#ifndef _DEBUG
+#if !defined(_DEBUG) && !defined(__EMSCRIPTEN__)
     init_flags |= SDL_HWPALETTE;
 #endif
   }
