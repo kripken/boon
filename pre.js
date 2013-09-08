@@ -20,7 +20,7 @@ Module.screenIsReadOnly = true;
     }
     if (now > reportTime + 1000) {
       var fps = 1000/mean;
-      console.log('fps: ' + Math.round(fps));
+      console.log('js fps: ' + Math.round(fps));
       reportTime = now;
     }
   };
