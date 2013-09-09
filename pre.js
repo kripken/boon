@@ -1,4 +1,6 @@
 
+if (typeof Module === 'undefined') Module = {};
+
 Module.arguments = ['-nofullscreen', '-nosound'];
 Module.screenIsReadOnly = true;
 
