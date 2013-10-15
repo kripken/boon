@@ -917,7 +917,8 @@ function demangleAll(text) {
   return text.replace(/__Z[\w\d_]+/g, function(x) { var y = demangle(x); return x === y ? x : (x + ' [' + y + ']') });
 }
 function stackTrace() {
-  return demangleAll(new Error().stack);
+  var stack = new Error().stack;
+  return stack ? demangleAll(stack) : '(no stack trace available)'; // Stack trace is not available at least on IE10 and Safari 6.
 }
 // Memory management
 var PAGE_SIZE = 4096;
@@ -8834,7 +8835,7 @@ function assert(check, msg) {
     var PACKAGE_PATH = window['encodeURIComponent'](window.location.pathname.toString().substring(0, window.location.pathname.toString().lastIndexOf('/')) + '/');
     var PACKAGE_NAME = 'boon.data';
     var REMOTE_PACKAGE_NAME = 'boon.data';
-    var PACKAGE_UUID = '44b7b131-89c2-48dc-86d0-b4a9fb172ded';
+    var PACKAGE_UUID = '00db7fef-8358-4cbd-b498-5e1920053b9b';
     function fetchRemotePackage(packageName, callback, errback) {
       var xhr = new XMLHttpRequest();
       xhr.open('GET', packageName, true);
