@@ -115,9 +115,12 @@ void I_EndDisplay(void)
   InDisplay = false;
 }
 
+#include <emscripten.h>
+
 void I_uSleep(unsigned long usecs)
 {
-    SDL_Delay(usecs/1000);
+    emscripten_sleep(usecs/1000);
+    //SDL_Delay(usecs/1000);
 }
 
 int ms_to_next_tick;

@@ -178,9 +178,7 @@ static void D_Wipe(void)
       int nowtime, tics;
       do
         {
-#ifndef __EMSCRIPTEN__
           I_uSleep(5000); // CPhipps - don't thrash cpu in this loop
-#endif
           nowtime = I_GetTime();
           tics = nowtime - wipestart;
         }
@@ -393,7 +391,11 @@ void D_DoomLoopIterWrapper(void *arg)
 static void D_DoomLoop(void)
 {
 #ifdef __EMSCRIPTEN__
-  emscripten_set_main_loop(D_DoomLoopIter, 0, 1);
+  while (1) {
+    D_DoomLoopIter();
+    emscripten_sleep(1);
+  }
+  //emscripten_set_main_loop(D_DoomLoopIter, 0, 1);
   //D_DoomLoopIter(); // call once, will schedule further calls of itself
   //emscripten_exit_with_live_runtime();
 #else
