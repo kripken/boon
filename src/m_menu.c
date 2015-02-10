@@ -61,6 +61,10 @@
 #include "r_demo.h"
 #include "r_fps.h"
 
+#if __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 extern patchnum_t hu_font[HU_FONTSIZE];
 extern boolean  message_dontfuckwithme;
 
@@ -1051,7 +1055,11 @@ static void M_QuitResponse(int ch)
       i--;
     }
   }
+#if __EMSCRIPTEN__
+  emscripten_force_exit(0); // due to async stuff, emscripten defaults to not allowing exit to actually exit
+#else
   exit(0); // killough
+#endif
 }
 
 void M_QuitDOOM(int choice)
